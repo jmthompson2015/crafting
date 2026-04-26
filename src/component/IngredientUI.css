@@ -1,0 +1,150 @@
+/* ─────────────────────────────────────────────
+   IngredientUI.css  —  crafting-recipe item node
+   ───────────────────────────────────────────── */
+
+/* Rarity color palette */
+:root {
+  --rarity-common: #9ca3af;
+  --rarity-uncommon: #4ade80;
+  --rarity-rare: #60a5fa;
+  --rarity-epic: #c084fc;
+  --rarity-legendary: #fbbf24;
+
+  --node-bg: #ffffff;
+  --node-surface: #dddddd;
+  --node-border-width: 2px;
+  --node-radius: 10px;
+  --node-size: 32px;
+  /* icon area size */
+}
+
+/* ── Base node shell ─────────────────────────── */
+.item-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 8px 4px;
+  background: var(--node-bg);
+  border: var(--node-border-width) solid var(--rarity-color, var(--rarity-common));
+  border-radius: var(--node-radius);
+  box-shadow:
+    0 0 8px -2px var(--rarity-color, var(--rarity-common)),
+    0 4px 16px rgba(0, 0, 0, 0.55);
+  cursor: default;
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.15s ease;
+  min-width: 64px;
+}
+
+.item-node:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 16px 0px var(--rarity-color, var(--rarity-common)),
+    0 6px 20px rgba(0, 0, 0, 0.65);
+}
+
+/* ── Rarity modifier — sets the CSS custom property ── */
+.item-node--common {
+  --rarity-color: var(--rarity-common);
+}
+
+.item-node--uncommon {
+  --rarity-color: var(--rarity-uncommon);
+}
+
+.item-node--rare {
+  --rarity-color: var(--rarity-rare);
+}
+
+.item-node--epic {
+  --rarity-color: var(--rarity-epic);
+}
+
+.item-node--legendary {
+  --rarity-color: var(--rarity-legendary);
+}
+
+/* ── Icon wrapper (square, clipped) ─────────────── */
+.item-node__icon-wrap {
+  position: relative;
+  width: var(--node-size);
+  height: var(--node-size);
+  border-radius: 6px;
+  background: var(--node-surface);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.item-node__icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+  /* keeps pixel-art sprites crisp */
+}
+
+/* Fallback when no image is supplied */
+.item-node__icon-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: #4b5563;
+  font-weight: 700;
+}
+
+/* ── Stack-count badge ───────────────────────── */
+.item-node__qty {
+  position: absolute;
+  bottom: 3px;
+  right: 4px;
+  font-family: "Courier New", monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  text-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.9),
+    0 0 6px rgba(0, 0, 0, 0.8);
+  pointer-events: none;
+}
+
+/* ── Label text ──────────────────────────────── */
+.item-node__label {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  color: #000000;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100px;
+  letter-spacing: 0.02em;
+}
+
+/* ── React Flow handles ───────────────────────── */
+.item-node__handle {
+  width: 1px !important;
+  height: 1px !important;
+  min-width: unset !important;
+  min-height: unset !important;
+  border: none !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+}
+
+/* Sit flush on the top/bottom border edge */
+.item-node__handle--target {
+  top: 0 !important;
+  transform: translate(-50%, 0) !important;
+}
+
+.item-node__handle--source {
+  bottom: 0 !important;
+  transform: translate(-50%, 0) !important;
+}

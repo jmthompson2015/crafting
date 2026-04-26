@@ -1,0 +1,14 @@
+.graph {
+    height: 400px;
+}
+
+.no-recipe {
+    font-style: italic;
+    margin: 20px;
+    text-align: center;
+}
+
+.title {
+    margin: 20px;
+    text-align: center;
+}
